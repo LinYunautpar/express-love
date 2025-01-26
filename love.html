@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>给徐玛丽的心动告白</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff0066;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .heart {
+            font-size: 100px;
+            color: #ff3366;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        .message-box {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255,105,180,0.3);
+            margin: 20px;
+            max-width: 500px;
+        }
+
+        #loveMessage {
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+        }
+
+        button:hover {
+            background: #ff1493;
+            transform: translateY(-2px);
+        }
+
+        /* 爱心雨动画 */
+        .heart-rain {
+            position: fixed;
+            top: -10px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❤ 徐玛丽 ❤</h1>
+        <div class="message-box">
+            <div id="loveMessage">遇见你的那刻起，我的世界开始绽放彩虹</div>
+            <button onclick="showLoveMessage()">点击查看真心话</button>
+        </div>
+        <div class="heart" onclick="createHearts()">❤</div>
+    </div>
+
+    <script>
+        // 浪漫语句库
+        const messages = [
+            "你的笑容是我每天的阳光",
+            "在星河璀璨中，你是我唯一的月亮",
+            "愿以余生为笔，写尽我们的浪漫篇章",
+            "心跳的频率，是我爱你的节奏",
+            "你是我所有温柔的来源和归属",
+            "世界需要逻辑，而我只需要你"
+        ];
+
+        function showLoveMessage() {
+            const messageElement = document.getElementById('loveMessage');
+            messageElement.style.animation = 'pulse 0.5s';
+            setTimeout(() => {
+                messageElement.style.animation = '';
+            }, 500);
+            messageElement.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // 创建爱心雨
+        function createHearts() {
+            for(let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-rain';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        // 自动启动爱心雨
+        setInterval(createHearts, 5000);
+    </script>
+</body>
+</html>
